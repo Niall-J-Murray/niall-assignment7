@@ -34,7 +34,7 @@ public class CustomListApplication {
 		printCustomArrayList(customObjectList, count);
 		customObjectList.remove(5);
 		count--;
-		System.out.println("'Test Object' removed from index " + 5);
+
 		printCustomArrayList(customObjectList, count);
 
 	}

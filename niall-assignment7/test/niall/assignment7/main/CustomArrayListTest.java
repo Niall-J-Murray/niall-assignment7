@@ -21,14 +21,22 @@ class CustomArrayListTest {
 	void should_double_array_capacity_when_full() {
 		CustomArrayList<Object> sut = new CustomArrayList<>();
 
-		int currentCapacity = sut.items.length;
-		for (int i = 0; i < currentCapacity + 1; i++) {
+		int initialCapacity = sut.items.length;
+		for (int i = 0; i < initialCapacity; i++) {
 			sut.add(i);
 		}
 
+		sut.remove(9);
+		sut.remove(6);
+		sut.add(101);
+		sut.add(102);
+		sut.add(103);
+		sut.add(7,1001);
+		sut.add(7,1002);
+
 		int doubledCapacity = sut.items.length;
 
-		assertEquals(doubledCapacity, (currentCapacity * 2));
+		assertEquals(doubledCapacity, (initialCapacity*2));
 
 	}
 
@@ -109,8 +117,11 @@ class CustomArrayListTest {
 			sut.add(i);
 		}
 
-		assertEquals(9, sut.remove(9));
-		assertEquals(21, sut.getSize());
+		assertEquals(4, sut.remove(4));
+		assertEquals(10, sut.remove(9));
+		assertEquals(15, sut.remove(13));
+		assertEquals(19, sut.getSize());
+		assertEquals(40, sut.items.length);
 	}
 
 	@Test
@@ -122,20 +133,12 @@ class CustomArrayListTest {
 		}
 
 		assertThrows(IndexOutOfBoundsException.class,
-				() -> {
-					sut.get(-2);
-				});
+				() -> sut.get(-2));
 		assertThrows(IndexOutOfBoundsException.class,
-				() -> {
-					sut.get(27);
-				});
+				() -> sut.get(27));
 		assertThrows(IndexOutOfBoundsException.class,
-				() -> {
-					sut.add(28, 5);
-				});
+				() -> sut.add(28, 5));
 		assertThrows(IndexOutOfBoundsException.class,
-				() -> {
-					sut.remove(29);
-				});
+				() -> sut.remove(29));
 	}
 }
